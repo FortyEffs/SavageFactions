@@ -77,6 +77,11 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.0.1</version>
             </plugin>
+            <plugin>
+            	<groupId>com.massivecraft</groupId>
+            	<artifactId>Factions</artifactId>
+            	<version>1.6.9.5-U0.2.1-RC-1.6.2-RC</version>
+            </plugin>
         </plugins>
     </build>
 
