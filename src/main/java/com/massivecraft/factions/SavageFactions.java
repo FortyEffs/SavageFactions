@@ -577,13 +577,8 @@ public class SavageFactions extends MPlugin {
 		completions = completions.stream()
 				  .filter(m -> m.toLowerCase().startsWith(lastArg))
 				  .collect(Collectors.toList());
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            completions.add(player.getName());
-        }
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            completions.add(player.getName());
-        }
-        return completions;
+
+		return completions;
 	}
 
 	public void createTimedHologram(final Location location, String text, Long timeout) {
