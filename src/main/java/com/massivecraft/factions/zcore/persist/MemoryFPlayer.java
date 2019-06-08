@@ -27,6 +27,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -1052,7 +1053,8 @@ public abstract class MemoryFPlayer implements FPlayer {
 				if (efplayer == null) {
 					continue;
 				}
-				if (efplayer != null && this.getRelationTo(efplayer).equals(Relation.ENEMY) && !efplayer.isStealthEnabled()) {
+				if (efplayer.isVanished()) continue;
+				if (this.getRelationTo(efplayer).equals(Relation.ENEMY) && !efplayer.isStealthEnabled()) {
 					setFlying(false);
 					msg(TL.COMMAND_FLY_ENEMY_NEAR);
 					Bukkit.getServer().getPluginManager().callEvent(new FPlayerStoppedFlying(this));
@@ -1214,12 +1216,19 @@ public abstract class MemoryFPlayer implements FPlayer {
 		}
 	}
 
+	public String commas(double amount){
+		DecimalFormat formatter = new DecimalFormat("#,###.00");
+		String number = formatter.format(amount);
+		return number;
+	}
+
+
 	@Override
 	public void takeMoney(int amt) {
 		if (hasMoney(amt)) {
 			Economy econ = SavageFactions.plugin.getEcon();
 			econ.withdrawPlayer(getPlayer(), amt);
-			sendMessage(TL.GENERIC_MONEYTAKE.toString().replace("{amount}", amt + ""));
+			sendMessage(TL.GENERIC_MONEYTAKE.toString().replace("{amount}", commas(amt)));
 		}
 	}
 }
